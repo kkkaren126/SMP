@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <title>Sistema de Matrículas de Petrópolis</title>
+</head>
+<body>
+    <div class="main">
+    <div class="area">
+        <h1 class="two-colors">S.M.P.</h1>
+        <p>Sistema de Matriculas de Petropolis</p>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <input type="password" id="password" placeholder="Digite sua Senha">
+                <button id="login" onclick="login()">Entrar</button>
+                <p class="error" id="error-message"></p>
+            </div>
+        </div>
+        <button id="openModal">Entrar</button>
+        <script src="{{ url_for('static', filename='login.js') }}"></script>
+    </div>
+    </div>
+</body>
+</html> 

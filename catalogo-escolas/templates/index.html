@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <title>Sistema de Matrículas de Petrópolis</title>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="search-form">
+            <form class="search" method="get" action="/main">
+                <label for="nome_escola">Nome da Escola:</label>
+                <div class="search-btn">
+                    <input type="text" name="nome_escola" id="nome_escola" value="{{ nome_escola or '' }}">
+                    <button class="srcbtn" type="submit">Buscar</button>
+                </div>
+                <div class="label-bairro">
+                <label for="bairro">Bairro/Região:</label>
+                <select name="bairro" id="bairroslct">
+                    <option value="">Todos</option>
+                    {% for b in bairros %}
+                        <option value="{{ b }}" {% if b == bairro_selecionado %}selected{% endif %}>{{ b }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+            </form>
+        </div>
+        <div class="action-buttons">
+            <button onclick="abrirModal('modalEscola')">Adicionar Escola</button>
+            <button onclick="mostrarMapa()">Exibir Mapa</button>
+        </div>
+    </div>
+    <h1 class="listname">Lista de Escolas</h1>
+    <ul>
+        {% for escola in escolas %}
+            <li data-nome="{{ escola[1] }}" data-endereco="{{ escola[2] }}" data-vagas="{{ escola[5] }}">
+                <div class="excluir-icon">
+                    <a href="{{ url_for('excluir_escola', id=escola[0]) }}" onclick="return confirm('Tem certeza que deseja excluir esta escola?')">
+                        <img src="{{ url_for('static', filename='assets/trash.svg') }}" alt="Excluir escola" title="Excluir escola">
+                    </a>
+                </div>
+                    <span class="escola-nome">{{ escola[1] }}</span>
+                    <span class="escola-endereco">{{ escola[2] }}</span>
+                    <span class="escola-bairro">{{ escola[3] }}</span>
+                    <span class="escola-telefone">{{ escola[4] }}</span>
+                <div class="vagas-com-edicao">
+                    <span class="escola-vagas">{{ escola[5] }} vagas</span>
+                    <button class="edit-btn" onclick="openEditar('{{ escola[0] }}')" title="Editar vagas">
+                        <img class="editar-icon" src="{{ url_for('static', filename='assets/pencil-square.svg') }}" alt="Editar vagas">
+                    </button>    
+                </div>
+                <div id="modalEditar_{{ escola[0] }}" class="modal" style="display:none;">
+                    <h3>Editar Número de Vagas</h1>
+                        <label for="vagas">Número de Vagas:</label><br>
+                        <input type="number" id="vagasEdit_{{ escola[0] }}" name="vagas_disponiveis" value="{{ escola[5] }}" required><br><br>            
+                        <button type="button" onclick="enviarEdicao('{{ escola[0] }}')">Atualizar Vagas</button>
+                        <button type="button" onclick="closeEditar('{{ escola[0] }}')">Cancelar</button>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <div id="modalEscola" class="modal" style="display:none;">
+        <form id="formEscola" action="{{ url_for('adicionar') }}" method="POST">
+            <h1>Adicionar Nova Escola</h1>
+
+            <label for="nome">Nome:</label><br>
+            <input type="text" id="nome" name="nome" required><br><br>
+    
+            <label for="endereco">Endereço:</label><br>
+            <input type="text" id="endereco" name="endereco" required><br><br>
+    
+            <label for="telefone">Telefone:</label><br>
+            <input type="tel" id="telefone" name="telefone"><br><br>
+    
+            <label for="bairro">Bairro/Região:</label><br>
+            <input type="text" id="bairro" name="bairro" required><br><br>
+    
+            <label for="vagas">Número de Vagas:</label><br>
+            <input type="number" id="vagas" name="vagas_disponiveis" required><br><br>
+    
+            <button type="submit">Salvar</button>
+            <button type="button" onclick="fecharModal()">Cancelar</button>
+        </form>
+    </div>
+    <div id="mapModal">
+        <div id="mapDiv">
+            <button onclick="fecharMapa()">Fechar Mapa</button>
+            <div id="map" style=></div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='map.js') }}"></script>
+</html>

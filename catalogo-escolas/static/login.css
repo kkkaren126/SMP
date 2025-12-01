@@ -1,0 +1,146 @@
+@font-face{
+  font-family: "adelia";
+  src: url('assets/adelia.otf');
+}
+
+body {
+  background-color: wheat
+}
+
+h1 {
+  font-family: adelia;
+}
+
+p {
+  font-family: adelia;
+  color: purple;
+  font-size: 23px;
+  margin-left: 30px;
+  margin-top: -120px;
+}
+
+.two-colors {
+  position: center;
+  font-size: 200px;
+  background: linear-gradient(to right,
+     blue 20%,
+     green 30%, 
+     red 99%, 
+     orange 150%,
+     purple 200%
+   );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+   font-weight: 900;
+}
+
+#openModal {
+  background-color: #04AA6D; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  padding-left: 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 100px;
+  border-radius: 5px;
+  margin-top: 50px;
+  margin-left: 265px;
+}
+
+button:hover {
+  transition: 0.2s ease-in;
+  background-position: bottom;
+  background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
+}
+
+
+.main{
+    max-width: fit-content;
+    justify-content: center;
+    margin: auto;
+}
+
+.area {
+  display: inline-block;
+  margin-inline: auto;
+  justify-self: center;
+  max-width: fit-content;
+  padding: 10px;
+}
+
+input {
+  display: block;
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+.modal {
+  display: none; /* Oculto por padrão */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  margin-bottom: 50px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 40%;
+  height: 170px;
+  padding: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* Botão para fechar */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: red;
+}
+
+#login {
+  background-color: #04AA6D; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  padding-left: 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 100px;
+  border-radius: 5px;
+  margin-top: 50px;
+  margin-right: 20px;
+}
+
+#error-message {
+  padding-top: 40px;
+  padding-right: 45px;
+  font: 1em sans-serif;
+}
